@@ -11,12 +11,12 @@
     let submit = ()=>console.log("loL");
 </script>
 
-<div>
+<form on:submit|preventDefault={submit}>
     <p>Welcome! Join us! You can register here!</p>
     <div>
         <select value={language} on:change="{() => language = ''}">
-            {#each language as lang}
-                <option value={lang}>
+            {#each languages as lang}
+                <option value={lang.id}>
                     {lang.text}
                 </option>
             {/each}
@@ -32,4 +32,4 @@
     <div>
         <button on:click={submit}>Register</button>
     </div>
-</div>
+</form>
