@@ -1,5 +1,22 @@
 <script>
-    let  avatar, fileinput;
+    let  avatar, fileinput, title, contentText;
+
+    const create = () => {
+        debugger;
+        const formData = new FormData();
+        formData.append('file', fileinput.files[0]);
+        formData.append('title', title);
+        formData.append('contentText', contentText);
+        const upload = fetch('http://localhost:8080/posts/create', {
+            method: 'POST',
+            body: formData
+        }).then((response) => response.json()).then((result) => {
+            console.log('Success:', result);
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
 
     const onFileSelected =(e)=>{
         let image = e.target.files[0];
@@ -12,16 +29,21 @@
 
 </script>
 <div id="app">
-    <h1>Upload Image</h1>
+    <h1>Create post:</h1>
+
+    <input bind:value={title} placeholder="enter your title">
+    <input bind:value={contentText} placeholder="enter your content (optional)">
 
     {#if avatar}
         <img class="avatar" src="{avatar}" alt="d" />
+        <button on:click={create}>Create</button>
     {:else}
         <p>no img</p>
     {/if}
     <img class="upload" src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
     <div class="chan" on:click={()=>{fileinput.click();}}>Choose Image</div>
     <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={fileinput} >
+
 
 </div>
 <style>
