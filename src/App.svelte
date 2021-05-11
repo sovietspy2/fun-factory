@@ -1,11 +1,42 @@
 <script>
 	export let name;
+	import { Router, Link, Route } from "svelte-routing";
+	import Posts from "./routes/Posts.svelte";
+	import Create from "./routes/Create.svelte"
+	import Login from "./routes/Login.svelte"
+	import Home from "./routes/Home.svelte"
+	import Register from "./routes/Register.svelte"
+	export let user;
+	export let url = '';
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<Router url="{url}">
+		<nav>
+			<Link to="/">Home</Link>
+			<Link to="/posts">Posts</Link>
+			<Link to="/create">Create</Link>
+			{#if user}
+				<Link to="/profile">Profile</Link>
+			{:else}
+				<Link to="/login">Login</Link>
+				<Link to="/register">Register</Link>
+			{/if}
+		</nav>
+		<div>
+			<Route path="/posts/:id" component="{Posts}" />
+			<Route path="/posts" component="{Posts}" />
+			<Route path="/profile" component="{Posts}" />
+			<Route path="/create" component="{Create}" />
+			<Route path="/register" component="{Register}" />
+			<Route path="/login" component="{Login}" />
+			<Route path="/" component="{Home}" />
+		</div>
+	</Router>
+
 </main>
+
+
 
 <style>
 	main {
