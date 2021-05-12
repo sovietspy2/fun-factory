@@ -1,19 +1,32 @@
 <script>
-    let data;
+    import Post from "./Post.svelte"
+    import {onMount} from "svelte";
 
-    const create = () => {
-        data = fetch('API_URL'+'/posts').then((response) => response.json()).then((result) => {
-            console.log('Success:', result);
-        })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    };
+    let posts = [];
+
+    const reload = () => {
+        posts=[];
+    }
+
+    onMount(async () => {
+        const res = await fetch('API_URL'+'/posts');
+        posts = await res.json();
+    });
 </script>
 
 <div>
-    <button on:click={create}>Get</button>
+
     <h1>Posts:</h1>
+    <ul>
+        {#each posts as post}
+            <Post
+                title={post.title}
+                contentText={post.contentText}
+            />
+        {/each}
+    </ul>
+
+    <button on:click={reload}>Get</button>
 
     <p>asd</p>
 </div>
