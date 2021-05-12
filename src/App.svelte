@@ -10,6 +10,12 @@
 	export let url = '';
 </script>
 
+<svelte:head>
+	<title>Fun Factory Wombat</title>
+
+	<base href="/" />
+</svelte:head>
+
 <main>
 	<Router url="{url}">
 		<nav>
