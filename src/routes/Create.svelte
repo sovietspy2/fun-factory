@@ -2,12 +2,11 @@
     let  avatar, fileinput, title, contentText;
 
     const create = () => {
-        debugger;
         const formData = new FormData();
         formData.append('file', fileinput.files[0]);
         formData.append('title', title);
         formData.append('contentText', contentText);
-        const upload = fetch('http://localhost:8080/posts/create', {
+        const upload = fetch('API_URL'+'/posts/create', {
             method: 'POST',
             body: formData
         }).then((response) => response.json()).then((result) => {
@@ -33,17 +32,15 @@
 
     <input bind:value={title} placeholder="enter your title">
     <input bind:value={contentText} placeholder="enter your content (optional)">
+    <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={fileinput} >
 
     {#if avatar}
         <img class="avatar" src="{avatar}" alt="d" />
         <button on:click={create}>Create</button>
     {:else}
-        <p>no img</p>
+        <img class="upload" src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
+        <div class="chan" on:click={()=>{fileinput.click();}}>Choose Image</div>
     {/if}
-    <img class="upload" src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
-    <div class="chan" on:click={()=>{fileinput.click();}}>Choose Image</div>
-    <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={fileinput} >
-
 
 </div>
 <style>
