@@ -46,7 +46,7 @@ export default {
         }),
         replace({
             //'API_URL': production ? process.env.URL : 'http://localhost:8080',
-            API_URL: production ? process.env.URL : 'http://localhost:8080',
+            API_URL: production ? process.env.API_URL : 'http://localhost:8080',
         }),
         // we'll extract any component CSS out into
         // a separate file - better for performance
