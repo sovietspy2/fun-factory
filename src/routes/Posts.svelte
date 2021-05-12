@@ -2,15 +2,13 @@
     let data;
 
     const create = () => {
-        debugger;
-        data = fetch('http://localhost:8080/posts').then((response) => response.json()).then((result) => {
+        data = fetch('API_URL'+'/posts').then((response) => response.json()).then((result) => {
             console.log('Success:', result);
         })
             .catch((error) => {
                 console.error('Error:', error);
             });
     };
-
 </script>
 
 <div>
