@@ -8,11 +8,12 @@
 	import Register from "./routes/Register.svelte"
 	export let user;
 	export let url = '';
+	export let token;
+	console.log("TOKEN IN APP:"+token);
 </script>
 
 <svelte:head>
 	<title>Fun Factory Wombat</title>
-
 	<base href="/" />
 </svelte:head>
 
@@ -22,7 +23,7 @@
 			<Link to="/">Home</Link>
 			<Link to="/posts">Posts</Link>
 			<Link to="/create">Create</Link>
-			{#if user}
+			{#if token}
 				<Link to="/profile">Profile</Link>
 			{:else}
 				<Link to="/login">Login</Link>

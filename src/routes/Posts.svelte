@@ -1,6 +1,7 @@
 <script>
     import Post from "./Post.svelte"
     import {onMount} from "svelte";
+    import {token} from "../stores";
 
     let posts = [];
 
@@ -15,8 +16,8 @@
 </script>
 
 <div>
-
     <h1>Posts:</h1>
+    <p>your token is : {$token}</p>
     <ul>
         {#each posts as post}
             <Post
