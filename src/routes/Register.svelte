@@ -8,7 +8,17 @@
         { id: "HUN", text: `Hungarian` },
         { id: "GER", text: `German` }
     ];
-    let submit = ()=>console.log("loL");
+
+    async function registerUser() {
+        const res = await fetch('API_URL'+'/register', { headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },method: 'POST', body: JSON.stringify({name:username, password, language}) });
+        const loginData = await res.text();
+        console.log(loginData)
+    }
+
+    let submit = ()=>registerUser();
 </script>
 
 <form on:submit|preventDefault={submit}>
