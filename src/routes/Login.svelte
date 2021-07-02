@@ -4,19 +4,19 @@
     import { token } from '../stores.js';
     let err = false;
 
-
     let submit = async ()=> {
 
         try {
-            const res = await fetch('API_URL'+'/login', { method: 'POST', body: JSON.stringify({name:username, password:password}) });
+            const res = await fetch('API_URL'+'/login', { method: 'POST', body: JSON.stringify({name:username, password}) });
             const loginData = await res.text();
             token.set(loginData);
+            console.log("login request send successfully")
         } catch (e) {
             err = true;
-            console.error(e);
+            console.error("login request failed",e);
         }
     }
-    console.log("loL");
+
 </script>
 
 <div>

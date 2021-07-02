@@ -10,10 +10,12 @@
     ];
 
     async function registerUser() {
-        const res = await fetch('API_URL'+'/register', { headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },method: 'POST', body: JSON.stringify({name:username, password, language}) });
+        const res = await fetch('API_URL'+'/register',
+            {
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                method: 'POST',
+                body: JSON.stringify({name:username, password, language})
+            });
         const loginData = await res.text();
         console.log(loginData)
     }
@@ -24,7 +26,7 @@
 <form on:submit|preventDefault={submit}>
     <p>Welcome! Join us! You can register here!</p>
     <div>
-        <select value={language} on:change="{() => language = ''}">
+        <select bind:value={language}>
             {#each languages as lang}
                 <option value={lang.id}>
                     {lang.text}
@@ -37,7 +39,7 @@
         <input bind:value={username} placeholder="enter your name">
     </div>
     <div>
-        <input bind:value={password} type="password" placeholder="enter your name">
+        <input bind:value={password} type="password" placeholder="enter your password">
     </div>
     <div>
         <button on:click={submit}>Register</button>
